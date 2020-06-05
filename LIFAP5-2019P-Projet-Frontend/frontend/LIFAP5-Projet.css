@@ -1,0 +1,77 @@
+.brand {
+    height: 25px;
+}
+
+.speech-bubble {
+    background: #efefef;
+    line-height: 1.2;
+    margin: 0 auto 40px;
+    max-width: 90%;
+    padding: 10px;
+    position: relative;
+}
+
+.speech-bubble p {
+    margin: 0 0 10px;
+}
+
+.speech-bubble p:last-of-type {
+    margin-bottom: 0;
+}
+
+.speech-bubble::after {
+    border-left: 20px solid transparent;
+    border-top: 20px solid #efefef;
+    bottom: -20px;
+    content: "";
+    position: absolute;
+    right: 20px;
+}
+
+span.tab-space {padding-left:1em;}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-link{
+    cursor: pointer;
+}
+
+.table-topics-body tr:hover{
+    background-color: grey;
+    cursor: pointer;
+}
+
+.topic-selected{
+    background-color: grey;
+}
+
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+
+.btn-img{
+	height: 20px;
+  	width: 20px;
+	cursor: pointer;
+}
+
+.btn-like{
+	height: 20px;
+  	width: 20px;
+	cursor: pointer;
+}
+
+.btn-dislike{
+	height: 20px;
+  	width: 20px;
+	cursor: pointer;
+}

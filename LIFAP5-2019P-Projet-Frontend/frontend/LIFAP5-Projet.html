@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title id="titre">Forum étudiant (LIFAP5-Projet 2018-2019)</title>
+
+  
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- icones -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <!-- css -->
+  <link rel="stylesheet" type="text/css" href="LIFAP5-Projet.css">
+  <!-- script de base pour le projet -->
+  <script src="./LIFAP5-Projet.js" type="text/javascript"></script> 
+</head>
+<body>
+    
+  <nav class="navbar navbar-light bg-light">
+
+        <div class="navbar-brand">
+          <img id="brand-logo" alt="Brand" class="brand" src="./logo.svg">
+        </div>
+        
+        <div class="navbar-text">
+          <div id="login">
+            <a href="" id="identifierBouton" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#identification-link">S'identifier</a>
+          </div>
+          <div class="modal fade" id="identification-link" tabindex="-1" role="dialog" aria-labelledby="identification-link" aria-hidden="true">
+            <div class="modal-dialog form-dark" role="document">
+              <div class="modal-content card card-image" style="background-image: url('https://i.imgur.com/hZtsEiv.png');">
+                <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                  <div class="modal-header text-center pb-4">
+                    <h3 class="modal-title w-100 white-text font-weight-bold" id="identification-link"><strong>Se</strong><a class="green-text font-weight-bold"><strong> Connecter</strong></a></h3>
+                    <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="md-form mb-5">
+                      <form name="apikey" id="apikeyform" class="form-signin">
+                        <div class="form-label-group">
+                          <input type="text" id="APIKEY" class="form-control" placeholder="Entrez votre API Key" required autofocus>
+                        </div>
+                        <hr></hr>
+                        <div class="row d-flex align-items-center mb-4">
+                          <div class="text-center mb-3 col-md-12">
+                            <button class="btn btn-success btn-block btn-rounded z-depth-1" type="submit">Connexion</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-text">Forum ouvert de débat étudiant</div>
+        <form class="form-inline">
+         <input class="form-control" type="search" id="search-text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success"  id="search-btn"   type="button">Search</button>
+        </form>
+
+      
+  </nav>
+<br>
+  <!-- Modal ajout de sujet -->
+  <div id="modal-upload-topic" class="modal fade" role="dialog" style="display: none;">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+        <form class="modal-content" id="upload-form" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h4 class="modal-title">Créer un nouveau sujet</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="upload-title">Titre :</label>
+              <input class="form-control" id="upload-title" name="title" type="text" value="" required>
+            </div>
+            <div class="form-group">
+              <label for="upload-description">Description :</label>
+              <input class="form-control" id="upload-description" name="description" type="text" >
+            </div>
+            <div class="form-group">
+              <label for="upload-open">Ouvert/fermé :</label>
+              <select class="form-control" id="upload-open">
+                <option value=true>Ouvert</option>
+                <option value=false>Fermé</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-primary" id="upload-btn" data-dismiss="modal" name="submit" value="Créer" type="button">
+          </div>
+        </form>
+    </div>
+  </div> 
+
+  <!-- Modal modification de sujet -->
+  <div id="modal-modif-topic" class="modal fade" role="dialog" style="display: none;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+          <form class="modal-content" id="modif-form" enctype="multipart/form-data">
+            <input id="modifId" type="hidden" value="">
+            <div class="modal-header">
+              <h4 class="modal-title">Modifier un sujet</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="modif-title">Titre :</label>
+                <input class="form-control" id="modif-title" name="title" type="text" required>
+              </div>
+              <div class="form-group">
+                <label for="modif-description">Description :</label>
+                <input class="form-control" id="modif-description" name="description" type="text" required>
+              </div>
+              <div class="form-group">
+                <label for="modif-open">Ouvert/fermé :</label>
+                <select class="form-control" id="modif-open">
+                  <option value=true>Ouvert</option>
+                  <option value=false>Fermé</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-warning" id="modif-topic-btn" data-dismiss="modal" name="submit" value="Modifier" type="button">
+            </div>
+          </form>
+      </div>
+    </div> 
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-12">
+
+              <table  class="table table-dark table-topics-body">
+              <thead>
+                <tr>
+                  <th id="tri-titre" style="width: 45%" class="btn-link" scope="col">Titre <i class="fas fa-chevron-up fa-fw"> </i></th>
+                  <th id="tri-nbc" style="width: 18%" class="btn-link" scope="col">Nb C. <i class="fas fa-chevron-up fa-fw fa-xs"> </i></th>
+                  <th id="tri-date" style="width: 18%" class="btn-link" scope="col">Date <i class="fas fa-chevron-up fa-fw"> </i></th>
+                  <th id="reglage" style="width: 16%" class="btn-link" scope="col"><i class="fas fa-cog"><i class="fas fa-chevron-up fa-fw"></i></i></th>
+                </tr>
+              </thead>
+              <tbody id="table-topics-body">
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>
+                      <img class="btn-img btn-modif" src="images/modif.png" alt="" />
+                      <img class="btn-img ml-2 btn-del" src="images/delete.png" alt="" />
+                    </td>
+                  </tr>
+            </tbody>
+          </table>
+           <p id="plus" class="btn-link text-center" scope="col"></p>
+          <!-- Trigger the modal with a button -->
+          <button type="" class="btn btn-default float-left" data-toggle="modal" data-target="#modal-upload-topic">
+            
+ 
+            <i class="fas fa-plus"></i><b>  Ajouter sujet</b> 
+          </button>
+
+ </div>
+  <div class="col-md-6 col-lg-6 col-xs-12">
+            <h2 id="titre-topic" class="text-center"> TITRE </h2>
+         <!-- panel contribs-->
+        <div id="panel-contribs">
+
+          <ul id="contrib-description" class="list-group">
+            <li class="list-group-item">Proposé par : <a id="auteurTopic" href="#"></a></li>
+            <li class="list-group-item">Proposé le : <span id="dateTopic"></span></li>
+            <li class="list-group-item">Description : <span id="descTopic"></span></li>
+          </ul>
+          <br>
+          <h1 class="text-center"> Commentaires </h1>
+          <hr class="bg-danger"></hr>
+            <table class="table table-dark table-bordered">
+                <thead id="test">
+                  <tr>
+                    <th id="tri-auteur" class="w-25 btn-link" scope="col">Auteur <i class="fas fa-chevron-up fa-fw"> </i></th>
+                    <th class="w-50" scope="col">Content <span id="tri-date-com"  class="btn-link">(tri date) <i class="fas fa-chevron-up fa-fw"></i></span></th>
+                    <th id="tri-like" class="w-10 btn-link" scope="col">Like <i class="fas fa-chevron-up fa-fw"> </i></th>
+                    <th id="tri-dislike" class="w-10 btn-link" scope="col">Dislike <i class="fas fa-chevron-up fa-fw"> </i></th>
+                  </tr>
+                </thead>
+                <tbody id="listeCommentaire">
+                  
+                </tbody>
+            </table>
+  </div>
+  <form class="form-inline" id="contrib-add">
+            <div class="speech-bubble col-12">
+              <textarea class="form-control" rows="2" id="contrib-text" placeholder="Saisir ici votre contribution" style="min-width: 100%"> </textarea>
+              <br>
+                
+            </div>
+            <div class="col-12 text-center">
+               <input class="btn btn-primary" id="contrib-btn" data-dismiss="modal" name="submit" value="Ajouter" type="button">
+            </div>
+         
+          </form>
+  
+
+  </div>
+
+
+</div>
+ 
+
+
+</div>
+<br><br>
+<!-- Footer -->
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+       
+        <small class="d-block mb-3 text-muted"> <center> 2018-2019 </center> </small>
+      </div>
+         </div>
+  </footer>
+<!-- Footer -->
+
+
+</body>
+</html>
+ 
